@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url(bg.gif);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    #todo-container {
+      background: rgba(225, 225, 245, 0.7);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      height: auto; /* Adjusted the height */
+      width: 800px; /* Adjusted the width */
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    #task {
+      height: 40px; /* Adjusted the input height */
+      width: 300px; /* Adjusted the input width */
+      font-size: 20px; /* Adjusted the font size */
+    }
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    input[type="checkbox"] {
+      margin-right: 10px;
+      height: 30px; /* Increased checkbox height */
+      width: 30px;  /* Increased checkbox width */
+    }
+    #button {
+      height: 40px; /* Adjusted the button height */
+      width: 120px; /* Adjusted the button width */
+      font-size: 20px; /* Adjusted the font size */
+      background-color: orange;
+    }
+    #task-list li {
+      font-size: 54px; /* Increased font size for added tasks */
+    }
+  </style>
+</head>
+<body>
+  <div id="todo-container">
+    <h1 style="font-size: 40px; font-family: fantasy;">TO-DO List</h1>
+    <input type="text" id="task" placeholder="Add a task">
+    <button id="button" onclick="addTask()">Add Task</button>
+    <ul id="task-list">
+    </ul>
+  </div>
+
+  <script>
+  
+    function addTask() {
+      const taskText = document.getElementById("task").value;
+      if (taskText) {
+        const taskList = document.getElementById("task-list");
+        const listItem = document.createElement("li");
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        listItem.appendChild(checkbox);
+        listItem.appendChild(document.createTextNode(taskText));
+        taskList.appendChild(listItem);
+        document.getElementById("task").value = "";
+
+      
+        checkbox.addEventListener("change", function() {
+          if (checkbox.checked) {
+            listItem.style.textDecoration = "line-through";
+          } else {
+            listItem.style.textDecoration = "none";
+          }
+        });
+      }
+    }
+  </script>
+</body>
+</html>

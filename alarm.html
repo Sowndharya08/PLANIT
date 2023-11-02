@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Advanced Alarm Clock</title>
+  <style>
+    
+  </style>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background-image:url(pastelbg.gif); background-size:cover;s">
+    <div class="container mt-5">
+        <div class="jumbotron">
+            <h1 class="display-4">Advanced Alarm Clock</h1>
+            <form id="alarm-form" class="form-inline">
+                <div class="form-group mx-3">
+                    <label for="time-input" class="mr-3">Set alarm for: </label>
+                    <input type="time" id="time-input" class="form-control" required>
+                </div>
+                <button type="button" id="set-button" class="btn btn-primary">Set Alarm</button>
+                <button type="button" id="stop-button" class="btn btn-danger">Stop</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+
+    <script>
+        let alarm;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById("set-button").addEventListener("click", setAlarm);
+            document.getElementById("stop-button").addEventListener("click", stopAlarm);
+        });
+
+        function setAlarm() {
+            const timeInput = document.getElementById("time-input").value;
+            const currentTime = new Date();
+            const selectedTime = new Date(currentTime.toDateString() + " " + timeInput);
+            
+            if (selectedTime <= currentTime) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Time',
+                    text: 'Please select a future time for the alarm.'
+                });
+            } else {
+                const timeDiff = selectedTime - currentTime;
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Alarm Set',
+                    text: `The alarm will ring at ${selectedTime.toLocaleTimeString()}`
+                });
+                document.getElementById("set-button").disabled = true;
+                document.getElementById("time-input").disabled = true;
+                document.getElementById("stop-button").disabled = false;
+                alarm = setTimeout(playSound, timeDiff);
+            }
+        }
+
+        function stopAlarm() {
+            clearTimeout(alarm);
+            Swal.fire({
+                icon: 'info',
+                title: 'Alarm Stopped',
+                text: 'The alarm has been stopped.'
+            });
+            resetUI();
+        }
+
+        function playSound() {
+            const sound = new Howl({
+                src: ['your-sound-file.mp3'],
+                volume: 1.0
+            });
+            sound.play();
+            Swal.fire({
+                icon: 'success',
+                title: 'Wake Up!',
+                text: 'Time to wake up!'
+            });
+            resetUI();
+        }
+
+        function resetUI() {
+            document.getElementById("set-button").disabled = false;
+            document.getElementById("time-input").disabled = false;
+            document.getElementById("stop-button").disabled = true;
+        }
+    </script>
+</body>
+</html>
