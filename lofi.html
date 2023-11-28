@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Lofi Study Room</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('calm.jpg');
+      background-size: cover;
+      background-position: center;
+      font-family: Arial, sans-serif;
+    }
+
+    #room-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #room {
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      font-family: 'Arial Black', sans-serif;
+      color: #333;
+      font-size: 36px;
+    }
+
+    .button {
+      display: inline-block;
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+    }
+
+    #playlist-selector {
+      margin-top: 20px;
+    }
+
+    #playlist-selector select {
+      width: 100%;
+      padding: 10px;
+    }
+
+
+    #background-selector {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 10px;
+      text-align: center;
+      color: #fff;
+    }
+
+    #background-selector img {
+      width: 80px;
+      height: 80px;
+      border-radius: 5px;
+      margin: 5px;
+      cursor: pointer;
+      transition: transform 0.3s;
+
+      transform: scale(1);
+    }
+
+    #background-selector img:hover {
+      transform: scale(1.2);
+    }
+
+    #image {
+      position: absolute;
+      top: 0;
+      right: 0;
+      text-align: center;
+    }
+
+    #image img {
+      max-width: 100px;/ height: 180px;
+    }
+
+    #play-button {
+      background-color: #007bff;
+      color: #fff;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      display: block;
+      margin: 10px auto;
+    }
+
+    #playlist-selector {
+      text-align: center;
+      display: none;
+    }
+
+    #playlist-selector select {
+      width: 100%;
+      padding: 10px;
+    }
+
+    #playlist-selector.active {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="room-container">
+    <div id="room">
+      <h1>LOFI STUDY ROOM</h1>
+      <a class="button" href="background.html">LET'S STUDY</a>
+    </div>
+  </div>
+  <div id="image">
+
+    <img src="cati.gif" alt="Image of a cat">
+    <button id="play-button">Play Music</button>
+    <div id="playlist-selector">
+      <p>Select Playlist:</p>
+      <select>
+        <option value="playlist1">Study Mode-CALM</option>
+        <option value="playlist2">FOCUS</option>
+        <option value="playlist3">PRO ACHIEVE</option>
+      </select>
+    </div>
+  </div>
+
+
+  <div id="background-selector">
+    <p>Select Background:</p>
+    <img src="lofi.jpg" onclick="changeBackground('lofi.jpg')" alt="Background 1">
+    <img src="room.jpg" onclick="changeBackground('room.jpg')" alt="Background 2">
+    <img src="lib.webp" onclick="changeBackground('lib.webp')" alt="Background 3">
+  </div>
+
+  <script>
+    function changeBackground(backgroundImage) {
+      document.body.style.backgroundImage = `url(${backgroundImage})`;
+    }
+
+    const playButton = document.getElementById("play-button");
+    const playlistSelector = document.getElementById("playlist-selector");
+
+    playButton.addEventListener("click", () => {
+      playlistSelector.classList.toggle("active");
+    });
+
+  </script>
+</body>
+
+</html>
